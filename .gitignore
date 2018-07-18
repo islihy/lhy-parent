@@ -2,4 +2,11 @@
 /.idea/
 /lhy-parent.iml
 /lhy-sb/lhy-sb.iml
+/lhy-sb/.settings/
+/lhy-sb/target/
+/lhy-sb/bin/
+/lhy-sb/.classpath
+/lhy-sb/.project
 /log.log
+/.settings/
+/.project
