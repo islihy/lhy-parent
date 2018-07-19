@@ -10,10 +10,13 @@ import org.lhy.sb.bean.Permission;
 import org.lhy.sb.bean.Role;
 import org.lhy.sb.bean.User;
 import org.lhy.sb.service.UserService;
+import org.lhy.sb.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
 
 public class AuthRealm extends AuthorizingRealm {
 
@@ -47,10 +50,21 @@ public class AuthRealm extends AuthorizingRealm {
 
     // 认证登录
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException{
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-        String username = usernamePasswordToken.getUsername();
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException{
+        String token = (String) auth.getCredentials();
+        // 解密获得username，用于和数据库进行对比
+        String username = JWTUtil.getUsername(token);
+        if (username == null) {
+            throw new AuthenticationException("token invalid");
+        }
         User user = userService.findByUsername(username);
-        return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
+        if (user == null) {
+            throw new AuthenticationException("User didn't existed!");
+        }
+
+        if (! JWTUtil.verify(token, username, user.getPassword())) {
+            throw new AuthenticationException("Username or password error");
+        }
+        return new SimpleAuthenticationInfo(token, token, this.getClass().getName());
     }
 }

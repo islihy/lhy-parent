@@ -51,7 +51,7 @@ public class LoginController {
                                   @RequestParam("password") String password) {
         User user = userService.findByUsername(username);
         if ( MD5Util.encryptPassword(password,user.getSalt()).equals(user.getPassword())){
-            return new ResponseBean(200, "Login success", JWTUtil.sign(username, password));
+            return new ResponseBean(200, "Login success", JWTUtil.sign(username, user.getPassword()));
         } else {
             throw new UnauthorizedException();
         }
