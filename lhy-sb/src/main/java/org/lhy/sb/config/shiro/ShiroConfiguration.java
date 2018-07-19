@@ -31,6 +31,7 @@ public class ShiroConfiguration {
 //        filterChainDefinitionMap.put("/log/writelog", "anon");
 //        filterChainDefinitionMap.put("/*/quart","anon");
         filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
+        filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return bean;
