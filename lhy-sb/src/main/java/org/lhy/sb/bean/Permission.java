@@ -21,7 +21,7 @@ public class Permission extends BaseModel implements Serializable {
     @Column("url")
     private String url;
 
-    @ManyMany(from = "permissionId",relation = "role_permission", to = "roleId")
+    @ManyMany(from = "permission_id",relation = "role_permission", to = "role_id")
     private List<Role> roles;
 
     public int getPid() {

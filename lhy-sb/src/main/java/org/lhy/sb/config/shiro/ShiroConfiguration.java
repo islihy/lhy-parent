@@ -23,13 +23,16 @@ public class ShiroConfiguration {
 
         bean.setLoginUrl("/login");
 //        bean.setSuccessUrl("/index");
-//        bean.setUnauthorizedUrl("/unauthorized");
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/blog/create", "roles[\"admin\"],perms[\"create\"]");
-//        filterChainDefinitionMap.put("/blog/query", "roles[\"user\"],perms[\"query\"]");
-//        filterChainDefinitionMap.put("/log/writelog", "anon");
-//        filterChainDefinitionMap.put("/*/quart","anon");
+        /**
+         * 登出，shiro自己退出
+         */
+//        filterChainDefinitionMap.put("/logout", "logout");
+        /**
+         * 所有的url都需要认证访问
+         */
+//        filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
         filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);

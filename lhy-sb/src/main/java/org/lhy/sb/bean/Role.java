@@ -18,10 +18,10 @@ public class Role extends BaseModel implements Serializable {
     @Column("name")
     private String name;
 
-    @ManyMany(from = "userId",relation = "user_role", to = "roleId")
+    @ManyMany(from = "user_id",relation = "user_role", to = "role_id")
     private List<User> bloggers;
 
-    @ManyMany(from = "roleId",relation = "role_permission", to = "permissionId")
+    @ManyMany(from = "role_id",relation = "role_permission", to = "permission_id")
     private List<Permission> permissions;
 
     public int getId() {

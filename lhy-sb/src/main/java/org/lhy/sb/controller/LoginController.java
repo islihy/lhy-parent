@@ -33,6 +33,11 @@ public class LoginController {
         }
         return "登出成功";
     }
+    @RequestMapping("/un")
+    public Object un() {
+        return "未授权页面";
+    }
+
 
     /**
      * shiro登录逻辑:身份认证流程
