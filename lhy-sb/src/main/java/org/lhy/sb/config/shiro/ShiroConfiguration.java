@@ -48,7 +48,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/**", "jwt");
         filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
         filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
-        filterChainDefinitionMap.put("/article","roles[\"test\"],perms[\"test\"]");
+        //filterChainDefinitionMap.put("/article","roles[\"test\"],perms[\"test\"]");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return bean;

@@ -23,6 +23,15 @@ public class AuthRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
+
+    /**
+     * 大坑！，必须重写此方法，不然Shiro会报错
+     */
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JWTToken;
+    }
+
     // 授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
