@@ -1,11 +1,14 @@
 package org.lhy.sb.service.impl;
 
+import org.lhy.sb.bean.Role;
 import org.lhy.sb.bean.User;
 import org.lhy.sb.nutz.base.service.BaseServiceImpl;
 import org.lhy.sb.service.UserService;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * User: hangyu.li E-mail:islihy@qq.com
@@ -21,7 +24,13 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Override
     public User findByUsername(String userName){
         Cnd cnd = Cnd.where("user_name","=",userName);
-        return this.fetch(cnd);
+        User user = this.fetch(cnd);
+        this.fetchLinks(user,"roles");
+        List<Role> roleList = user.getRoles();
+        for (Role role:roleList){
+            this.fetchLinks(role,"permissions");
+        }
+        return user;
     }
 
     @Override

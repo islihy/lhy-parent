@@ -22,15 +22,15 @@ public class ShiroConfiguration {
         bean.setSecurityManager(manager);
 
         bean.setLoginUrl("/login");
-        bean.setSuccessUrl("/index");
-        bean.setUnauthorizedUrl("/unauthorized");
+//        bean.setSuccessUrl("/index");
+//        bean.setUnauthorizedUrl("/unauthorized");
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/blog/create", "roles[\"admin\"],perms[\"create\"]");
-        filterChainDefinitionMap.put("/blog/query", "roles[\"user\"],perms[\"query\"]");
-        filterChainDefinitionMap.put("/log/writelog", "anon");
-        filterChainDefinitionMap.put("/*/quart","anon");
-//        filterChainDefinitionMap.put("/log/writelog", "authc");
+//        filterChainDefinitionMap.put("/blog/create", "roles[\"admin\"],perms[\"create\"]");
+//        filterChainDefinitionMap.put("/blog/query", "roles[\"user\"],perms[\"query\"]");
+//        filterChainDefinitionMap.put("/log/writelog", "anon");
+//        filterChainDefinitionMap.put("/*/quart","anon");
+        filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return bean;
@@ -40,6 +40,7 @@ public class ShiroConfiguration {
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
+
         return manager;
     }
 
