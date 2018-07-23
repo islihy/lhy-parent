@@ -74,6 +74,6 @@ public class AuthRealm extends AuthorizingRealm {
         if (! JWTUtil.verify(token, username, user.getPassword())) {
             throw new AuthenticationException("Username or password error");
         }
-        return new SimpleAuthenticationInfo(token, token, this.getClass().getName());
+        return new SimpleAuthenticationInfo(user, token, this.getClass().getName());
     }
 }

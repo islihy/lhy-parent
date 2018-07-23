@@ -48,7 +48,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/**", "jwt");
         filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
         filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
-//        filterChainDefinitionMap.put("/article","roles[\"test\"],perms[\"test\"]");
+        filterChainDefinitionMap.put("/article","roles[\"test1\"],perms[\"test\"]");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
@@ -67,6 +67,7 @@ public class ShiroConfiguration {
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
         subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
         manager.setSubjectDAO(subjectDAO);
+
         return manager;
     }
 
