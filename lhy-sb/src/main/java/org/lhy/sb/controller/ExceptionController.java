@@ -13,21 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class ExceptionController {
 
-    // 捕捉shiro的异常
+    /**
+     * 捕捉shiro的异常
+     * @param e
+     * @return
+     */
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(ShiroException.class)
     public ResponseBean handle401(ShiroException e) {
         return new ResponseBean(401, e.getMessage(), null);
     }
 
-    // 捕捉UnauthorizedException
+    /**
+     * 捕捉UnauthorizedException
+     * @return
+     */
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseBean handle401() {
         return new ResponseBean(401, "Unauthorized", null);
     }
 
-    // 捕捉其他所有异常
+    /**
+     * 捕捉其他所有异常
+     * @param request
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseBean globalException(HttpServletRequest request, Throwable ex) {
