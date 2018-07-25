@@ -27,12 +27,13 @@ public class ShiroConfiguration {
 
 
         // 添加自己的过滤器并且取名为jwt
-//        Map<String, Filter> filterMap = new HashMap<>();
-//        filterMap.put("jwt", new JWTFilter());
-//        bean.setFilters(filterMap);
+        Map<String, Filter> filterMap = new HashMap<>();
+        filterMap.put("statelessAuthc", new StatelessAuthcFilter());
+        bean.setFilters(filterMap);
 
         bean.setSecurityManager(manager);
-        bean.setLoginUrl("/login");
+
+//        bean.setLoginUrl("/login");
 //        bean.setSuccessUrl("/index");
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
@@ -44,11 +45,11 @@ public class ShiroConfiguration {
          * 所有的url都需要认证访问
          */
 //        filterChainDefinitionMap.put("/**", "authc");
-
-//        filterChainDefinitionMap.put("/**", "jwt");
-        filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
-        filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
-        filterChainDefinitionMap.put("/article","roles[\"test1\"],perms[\"test\"]");
+//        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/**", "statelessAuthc");
+//        filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
+//        filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
+//        filterChainDefinitionMap.put("/article","roles[\"tes2\"],perms[\"test3\"]");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
@@ -62,11 +63,11 @@ public class ShiroConfiguration {
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
          */
-//        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
-//        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
-//        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-//        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
-//        manager.setSubjectDAO(subjectDAO);
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
+        manager.setSubjectDAO(subjectDAO);
 
         return manager;
     }

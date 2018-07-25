@@ -50,40 +50,40 @@ public class LoginController {
      * @param password
      * @return
      */
-//    @RequestMapping("/login")
-//    public ResponseBean loginUser(@RequestParam("username") String username,
-//                                  @RequestParam("password") String password) {
-//        User user = userService.findByUsername(username);
-//        if ( MD5Util.encryptPassword(password,user.getSalt()).equals(user.getPassword())){
-//
-//            return new ResponseBean(200, "Login success", JWTUtil.sign(username, user.getPassword()));
-//        } else {
-//            throw new UnauthorizedException();
-//        }
-//    }
-
     @RequestMapping("/login")
-    public Object loginUser(@RequestParam("username") String username,@RequestParam("password") String password,HttpSession session) {
-
+    public ResponseBean loginUser(@RequestParam("username") String username,
+                                  @RequestParam("password") String password) {
         User user = userService.findByUsername(username);
         if ( MD5Util.encryptPassword(password,user.getSalt()).equals(user.getPassword())){
-            String token = JWTUtil.sign(username, user.getPassword());
-            JWTToken jwtToken = new JWTToken(token);
-            Subject subject = SecurityUtils.getSubject();
-            try {
-                subject.login(jwtToken);
 
-                User user1 = (User) subject.getPrincipal();
-                session.setAttribute("user", user1);
-                return new ResponseBean(200, "Login success",token);
-            } catch (Exception e) {
-                System.out.println(e);
-                return "登录失败";
-            }
+            return new ResponseBean(200, "Login success", JWTUtil.sign(username, user.getPassword()));
         } else {
             throw new UnauthorizedException();
         }
     }
+
+//    @RequestMapping("/login")
+//    public Object loginUser(@RequestParam("username") String username,@RequestParam("password") String password,HttpSession session) {
+//
+//        User user = userService.findByUsername(username);
+//        if ( MD5Util.encryptPassword(password,user.getSalt()).equals(user.getPassword())){
+//            String token = JWTUtil.sign(username, user.getPassword());
+//            JWTToken jwtToken = new JWTToken(token);
+//            Subject subject = SecurityUtils.getSubject();
+//            try {
+//                subject.login(jwtToken);
+//
+//                User user1 = (User) subject.getPrincipal();
+//                session.setAttribute("user", user1);
+//                return new ResponseBean(200, "Login success",token);
+//            } catch (Exception e) {
+//                System.out.println(e);
+//                return "登录失败";
+//            }
+//        } else {
+//            throw new UnauthorizedException();
+//        }
+//    }
 
     @GetMapping("/article")
     public ResponseBean article() {
