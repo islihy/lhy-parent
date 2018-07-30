@@ -45,7 +45,7 @@ public class ShiroConfiguration {
          * 所有的url都需要认证访问
          */
 //        filterChainDefinitionMap.put("/**", "authc");
-//        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/**", "statelessAuthc");
 //        filterChainDefinitionMap.put("/user/create","roles[\"admin\"]");
 //        filterChainDefinitionMap.put("/test","roles[\"test\"],perms[\"test\"]");
