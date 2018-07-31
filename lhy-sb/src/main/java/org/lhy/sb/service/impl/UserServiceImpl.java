@@ -6,6 +6,10 @@ import org.lhy.sb.nutz.base.service.BaseServiceImpl;
 import org.lhy.sb.service.UserService;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
+import org.nutz.json.Json;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +21,20 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
     public UserServiceImpl(Dao dao) {
         super(dao);
     }
 
     @Override
     public User findByUsername(String userName){
+
+
         Cnd cnd = Cnd.where("user_name","=",userName);
         User user = this.fetch(cnd);
         this.fetchLinks(user,"roles");
@@ -30,6 +42,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         for (Role role:roleList){
             this.fetchLinks(role,"permissions");
         }
+        redisTemplate.opsForList().leftPush("user:list", Json.toJson(user));
+        stringRedisTemplate.opsForValue().set("user:name", "张三");
+
         return user;
     }
 
