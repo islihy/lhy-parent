@@ -8,8 +8,13 @@ import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.StringRedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +38,6 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public User findByUsername(String userName){
-
-
         Cnd cnd = Cnd.where("user_name","=",userName);
         User user = this.fetch(cnd);
         this.fetchLinks(user,"roles");
@@ -44,7 +47,18 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         }
         redisTemplate.opsForList().leftPush("user:list", Json.toJson(user));
         stringRedisTemplate.opsForValue().set("user:name", "张三");
+        stringRedisTemplate.executePipelined(new RedisCallback<List<String>>() {
+            @Nullable
+            @Override
+            public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
 
+                StringRedisConnection stringRedisConn = (StringRedisConnection)connection;
+                stringRedisConn.openPipeline();
+                stringRedisConn.rPush("1","2");
+                stringRedisConn.closePipeline();
+                return null;
+            }
+        });
         return user;
     }
 

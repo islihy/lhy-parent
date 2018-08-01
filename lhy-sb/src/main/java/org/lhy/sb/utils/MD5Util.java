@@ -2,6 +2,9 @@ package org.lhy.sb.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * @author lihangyu
+ */
 public class MD5Util {
     //公盐
     private static final String PUBLIC_SALT = "demo" ;
