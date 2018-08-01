@@ -1,11 +1,14 @@
 package org.lhy.sb.service.impl;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.lhy.sb.bean.Role;
 import org.lhy.sb.bean.User;
 import org.lhy.sb.nutz.base.service.BaseServiceImpl;
 import org.lhy.sb.service.UserService;
+import org.nutz.aop.interceptor.ioc.TransAop;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
+import org.nutz.ioc.aop.Aop;
 import org.nutz.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,7 +19,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.List;
 
 /**
@@ -37,7 +43,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public User findByUsername(String userName){
+    @Transactional
+    public User findByUsername(String userName) {
         Cnd cnd = Cnd.where("user_name","=",userName);
         User user = this.fetch(cnd);
         this.fetchLinks(user,"roles");
@@ -45,7 +52,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         for (Role role:roleList){
             this.fetchLinks(role,"permissions");
         }
+        User user2 = new User();
+        user2.setUserName("无用");
+        this.createUser(user2);
         redisTemplate.opsForList().leftPush("user:list", Json.toJson(user));
+
         stringRedisTemplate.opsForValue().set("user:name", "张三");
         stringRedisTemplate.executePipelined(new RedisCallback<List<String>>() {
             @Nullable
@@ -59,6 +70,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
                 return null;
             }
         });
+
+        Object o  =redisTemplate.opsForList().index("user:list",1);
+        User user1 = Json.fromJson(User.class, new StringReader((String)o));
+        System.out.println(user1.getPassword());
         return user;
     }
 

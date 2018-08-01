@@ -55,9 +55,12 @@ public class ShiroConfiguration {
     }
 
     @Bean("securityManager")
-    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
+    public SecurityManager securityManager(//@Qualifier("authRealm") AuthRealm authRealm
+                                           ) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(authRealm);
+
+        //解决和springboot aop 事务冲突问题
+        //manager.setRealm(authRealm);
 
         /**
          * 关闭shiro自带的session，详情见文档
