@@ -1,7 +1,6 @@
 package org.lhy.sb.service;
 
 
-import org.apache.shiro.authc.AuthenticationException;
 import org.lhy.sb.bean.User;
 import org.lhy.sb.nutz.base.service.BaseService;
 

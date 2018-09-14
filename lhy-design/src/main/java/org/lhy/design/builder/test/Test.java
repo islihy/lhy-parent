@@ -9,14 +9,11 @@ public class Test {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Director director = new Director();
-
         ComputerBuilder hp = new HPComputerBuilder();
-
+        ComputerBuilder dell = new DELLComputerBuilder();
         director.setComputerBuilder(hp);
-
+        director.setComputerBuilder(dell);
         director.constructComputer();
-
-        //get the pc
         Computer pc = director.getComputer();
     }
 }
