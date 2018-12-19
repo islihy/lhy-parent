@@ -33,8 +33,8 @@ public class ShiroConfiguration {
 
         bean.setSecurityManager(manager);
 
-//        bean.setLoginUrl("/login");
-//        bean.setSuccessUrl("/index");
+//        primaryBean.setLoginUrl("/login");
+//        primaryBean.setSuccessUrl("/index");
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         /**
