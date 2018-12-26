@@ -1,9 +1,6 @@
 package org.lhy.sotami.primary.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author hangyu.li E-mail:islihy@qq.com
@@ -13,7 +10,8 @@ import javax.persistence.Table;
 @Table(name = "test")
 public class PrimaryTest {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
