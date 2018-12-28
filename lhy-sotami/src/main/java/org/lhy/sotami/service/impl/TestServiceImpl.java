@@ -36,8 +36,9 @@ public class TestServiceImpl implements TestService{
     public void test() {
         List<SecondaryTest> setestLists = secondaryRepository.findAll();
         List<PrimaryTest> primaryTests = primaryRepository.findAll();
-        redisTemplate.opsForList().leftPush("setestLists : ", JSON.toJSON(setestLists.get(0)));
+        redisTemplate.opsForList().leftPush("setestLists : ", setestLists);
         stringRedisTemplate.opsForValue().set("primaryTests : ",JSON.toJSON(primaryTests.get(0)).toString());
+
         System.out.println(setestLists.size());
         System.out.println(primaryTests.size());
     }
