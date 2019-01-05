@@ -6,10 +6,10 @@ package org.lhy.sapling.algorithm;
  */
 public class Test03 {
     public static void main(String[] args) {
-        int s = -1;
-        for (int i = 0; i;i++){
-            s+=2;
-        }
-        System.out.println(s);
+//        int s = -1;
+//        for (int i = 0; i;i++){
+//            s+=2;
+//        }
+//        System.out.println(s);
     }
 }
