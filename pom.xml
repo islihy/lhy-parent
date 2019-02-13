@@ -15,8 +15,6 @@
         <module>lhy-design</module>
         <module>lhy-thread</module>
         <module>lhy-io</module>
-        <module>lhy-spring</module>
-        <module>lhy-springboot</module>
         <module>lhy-sapling</module>
     </modules>
 </project>
