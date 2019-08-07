@@ -6,9 +6,8 @@ package org.lhy.design.proxy.test.test03;
  */
 public class TestCgibl {
     public static void main(String[] args) {
-        //创建我们的代理类
-        ShipProxy shipProxy = new ShipProxy();
-        Ship ship = (Ship)shipProxy.getProxy(Ship.class);
-        ship.travel();
+        CglibProxy cglibProxy = new CglibProxy();
+        BuyHouse buyHouse = (BuyHouse)cglibProxy.getProxy(BuyHouse.class);
+        buyHouse.buyHosue();
     }
 }
