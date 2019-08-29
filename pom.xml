@@ -16,5 +16,7 @@
         <module>lhy-thread</module>
         <module>lhy-io</module>
         <module>lhy-sapling</module>
+        <module>lhy-pay</module>
+        <module>mybatis-generator</module>
     </modules>
 </project>
