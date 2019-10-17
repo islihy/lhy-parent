@@ -18,5 +18,6 @@
         <module>lhy-sapling</module>
         <module>lhy-pay</module>
         <module>mybatis-generator</module>
+        <module>lhy-jdk8</module>
     </modules>
 </project>
