@@ -17,7 +17,7 @@ package jvm.classloader;
 public class MyTest02 {
 
     public static void main(String[] args) {
-        System.out.println(MyParent2.i_2);
+        System.out.println(MyParent2.s);
     }
 }
 

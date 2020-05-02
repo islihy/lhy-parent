@@ -19,5 +19,6 @@
         <module>lhy-pay</module>
         <module>mybatis-generator</module>
         <module>lhy-jdk8</module>
+        <module>lhy-spring</module>
     </modules>
 </project>
