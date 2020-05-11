@@ -1,6 +1,7 @@
 package stream.lesson3;
 
-import io.github.biezhi.java8.stream.Project;
+import stream.Project;
+
 import static java.util.stream.Collectors.*;
 
 import java.util.List;

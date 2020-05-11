@@ -1,6 +1,6 @@
 package jdk7;
 
-import io.github.biezhi.java8.growing.jdk5.EnumDemo;
+import java5.EnumDemo;
 
 /**
  * switch对String的支持

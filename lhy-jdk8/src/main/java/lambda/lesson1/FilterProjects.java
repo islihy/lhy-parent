@@ -1,7 +1,8 @@
 package lambda.lesson1;
 
-import io.github.biezhi.java8.lambda.lesson1.predicate.ProjectLanguagePredicate;
-import io.github.biezhi.java8.lambda.lesson1.predicate.ProjectStarPredicate;
+
+import lambda.lesson1.predicate.ProjectLanguagePredicate;
+import lambda.lesson1.predicate.ProjectStarPredicate;
 
 import java.util.ArrayList;
 import java.util.Comparator;

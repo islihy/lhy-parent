@@ -1,6 +1,7 @@
 package stream.lesson3;
 
-import io.github.biezhi.java8.stream.Project;
+
+import stream.Project;
 
 import java.util.List;
 import java.util.Optional;

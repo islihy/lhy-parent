@@ -1,6 +1,7 @@
 package jdk7;
 
-import io.github.biezhi.java8.growing.jdk6.ScriptEngineDemo;
+
+import jdk6.ScriptEngineDemo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

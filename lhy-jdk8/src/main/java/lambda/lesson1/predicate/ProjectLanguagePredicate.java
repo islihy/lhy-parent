@@ -1,7 +1,8 @@
 package lambda.lesson1.predicate;
 
-import io.github.biezhi.java8.lambda.lesson1.Project;
-import io.github.biezhi.java8.lambda.lesson1.ProjectPredicate;
+
+import lambda.lesson1.Project;
+import lambda.lesson1.ProjectPredicate;
 
 /**
  * 按编程语言过滤

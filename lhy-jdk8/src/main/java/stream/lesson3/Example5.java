@@ -1,6 +1,7 @@
 package stream.lesson3;
 
-import io.github.biezhi.java8.stream.Project;
+
+import stream.Project;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -21,6 +22,7 @@ import static java.util.stream.Collectors.*;
  * 按照作者名称筛选出每组star最高的项目
  *
  * @author biezhi
+ *
  * @date 2018/3/2
  */
 public class Example5 {

@@ -1,6 +1,7 @@
 package lambda.lesson3;
 
-import io.github.biezhi.java8.lambda.lesson1.Project;
+
+import lambda.lesson1.Project;
 
 import java.util.Arrays;
 import java.util.List;
